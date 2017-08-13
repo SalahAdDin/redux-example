@@ -25,7 +25,7 @@ const ProductList = ({products, addToCart}) => {
                     <div className="caption">
                         <h4>{product.name}</h4>
                         <p>
-                            <Button bsStyle="primary" onClick={() => this.addToCart(product)} role="button"
+                            <Button bsStyle="primary" onClick={() => addToCart(product)} role="button"
                                     disabled={product.inventory <= 0}>${product.price} <Glyphicon
                                 glyph="shopping-cart"/></Button>
                         </p>
@@ -34,13 +34,13 @@ const ProductList = ({products, addToCart}) => {
             )}
         </div>
     );
-}
+};
 
 const mapStateToProps = state => {
     return {
         products: state.products
     };
-}
+};
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -48,6 +48,6 @@ const mapDispatchToProps = dispatch => {
             dispatch(addToCart(product));
         }
     };
-}
+};
 
-export default connect(mapDispatchToProps, mapStateToProps)(ProductList);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductList);

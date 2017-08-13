@@ -7,7 +7,7 @@ const styles = {
     footer: {
         fontWeight: 'bold'
     }
-}
+};
 
 
 const ShoppingCart = ({cart, removeFromCart}) => {
@@ -36,13 +36,13 @@ const ShoppingCart = ({cart, removeFromCart}) => {
 
         </Panel>
     )
-}
+};
 
 const mapStateToProps = state => {
     return {
         cart: state.cart
     };
-}
+};
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -50,6 +50,6 @@ const mapDispatchToProps = dispatch => {
             dispatch(removeFromCart(product));
         }
     }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart);
