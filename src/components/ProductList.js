@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button, Glyphicon } from 'react-bootstrap';
-import store from '../store.js';
+import { connect } from 'react-redux';
 import { addToCart } from '../actionCreators.js';
 
 const styles = {
@@ -16,24 +16,10 @@ const styles = {
   }
 };
 
-class ProductList extends Component {
-  constructor() {
-    super();
-    this.addToCart = this.addToCart.bind(this);
-
-    this.state = {
-      products: [
-        { id: 1, name: "Hipster Ultimate", price: 299, image: "https://s3.amazonaws.com/makeitreal/projects/e-commerce/camiseta-1.jpg" },
-        { id: 2, name: "On Motion Live", price: 99, image: "https://s3.amazonaws.com/makeitreal/projects/e-commerce/camiseta-2.jpg" },
-        { id: 3, name: "Underground Max", price: 149, image: "https://s3.amazonaws.com/makeitreal/projects/e-commerce/camiseta-3.jpg" },
-      ]
-    }
-  }
-
-  render() {
+const ProductList = ({ products, addToCart }) => {
     return (
       <div style={styles.products}>
-        {this.state.products.map(product =>
+        {products.map(product =>
           <div className="thumbnail" style={styles.product} key={product.id}>
             <img src={product.image} alt={product.name} />
             <div className="caption">
@@ -46,11 +32,20 @@ class ProductList extends Component {
         )}
       </div>
     );
-  }
-
-  addToCart(product) {
-    store.dispatch(addToCart(product));
-  }
 }
 
-export default ProductList;
+const mapStateToProps = state => {
+  return{
+    products: state.products
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addToCart(product) {
+      dispatch(addToCart(product));
+    }
+  };
+}
+
+export default connect(mapDispatchToProps, mapStateToProps)(ProductList);
