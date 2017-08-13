@@ -18,9 +18,9 @@ const styles = {
 
 const ProductList = ({products, addToCart}) => {
     return (
-        <div style={styles.products}>
+        <div style={styles.products} className="product">
             {products.map(product =>
-                <div className="thumbnail" style={styles.product} key={product.id}>
+                <div id={"product-" + product.id} className="thumbnail" style={styles.product} key={product.id}>
                     <img src={product.image} alt={product.name}/>
                     <div className="caption">
                         <h4>{product.name}</h4>
