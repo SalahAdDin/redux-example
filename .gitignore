@@ -1,5 +1,11 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# Configuration files
+.idea
+.tags
+.tags_sorted_by_file
+
+
 # dependencies
 node_modules
 

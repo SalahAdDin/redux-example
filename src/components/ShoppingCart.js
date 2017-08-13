@@ -1,53 +1,55 @@
 import React from 'react';
-import { Panel, Table, Button, Glyphicon } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import { removeFromCart } from '../actionCreators.js';
+import {Panel, Table, Button, Glyphicon} from 'react-bootstrap';
+import {connect} from 'react-redux';
+import {removeFromCart} from '../actionCreators.js';
 
 const styles = {
-  footer: {
-    fontWeight: 'bold'
-  }
+    footer: {
+        fontWeight: 'bold'
+    }
 }
 
 
-const ShoppingCart = ({ cart, removeFromCart }) => {
+const ShoppingCart = ({cart, removeFromCart}) => {
     return (
-      <Panel header="Shopping Cart">
-        <Table fill>
-          <tbody>
-            {cart.map(product =>
-              <tr key={product.id}>
-                <td>{product.name}</td>
-                <td className="text-right">${product.price}</td>
-                <td className="text-right"><Button bsSize="xsmall" bsStyle="danger" onClick={() => removeFromCart(product)}><Glyphicon glyph="trash" /></Button></td>
-              </tr>
-            )}
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colSpan="4" style={styles.footer}>
-                Total: ${cart.reduce((sum, product) => sum + product.price, 0)}
-              </td>
-            </tr>
-          </tfoot>
-        </Table>
+        <Panel header="Shopping Cart">
+            <Table fill>
+                <tbody>
+                {cart.map(product =>
+                    <tr key={product.id}>
+                        <td>{product.name}</td>
+                        <td className="text-right">${product.price}</td>
+                        <td className="text-right"><Button bsSize="xsmall" bsStyle="danger"
+                                                           onClick={() => removeFromCart(product)}><Glyphicon
+                            glyph="trash"/></Button></td>
+                    </tr>
+                )}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colSpan="4" style={styles.footer}>
+                        Total: ${cart.reduce((sum, product) => sum + product.price, 0)}
+                    </td>
+                </tr>
+                </tfoot>
+            </Table>
 
-      </Panel>
+        </Panel>
     )
 }
 
 const mapStateToProps = state => {
-  return {
-    cart: state.cart
-  };
+    return {
+        cart: state.cart
+    };
 }
 
 const mapDispatchToProps = dispatch => {
-  return {
-    removeFromCart(product) {
-      dispatch(removeFromCart(product));
+    return {
+        removeFromCart(product) {
+            dispatch(removeFromCart(product));
+        }
     }
-  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart);
